@@ -1,2 +1,33 @@
 ---
 - include_vars: "defaults/main.yml"
+- name: make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: add sudoers users to wheel group
+  user: 
+    name: "{{ item.username }}"
+    groups: wheel
+    append: yes
+    state: present 
+    createhome: yes 
+    password: "{{ lookup('password', '/tmp/passwordfile chars=ascii_letters') }}"
+  with_items:
+    - "{{ users }}"
+  when: item.sudo == true
+
+- name: set up authorized keys for authorised users
+  authorized_key: 
+    user: "{{ item.username }}" 
+    key: "key: https://github.com/{{ item.github_username }}.keys"
+  with_items:
+    - "{{ users }}"

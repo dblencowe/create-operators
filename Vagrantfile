@@ -2,8 +2,8 @@
 
 require 'rbconfig'
 
-ROLE_NAME = 'ROLENAME'
-HOST_NAME = 'test' + ROLE_NAME
+ROLE_NAME = 'create-operators'
+HOST_NAME = 'test-' + ROLE_NAME
 VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|

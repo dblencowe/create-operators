@@ -1,0 +1,3 @@
+---
+users:
+  - { username: example, sudo: true, github_username: '' }

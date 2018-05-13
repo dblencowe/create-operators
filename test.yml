@@ -1,5 +1,8 @@
 ---
 - hosts: all
   become: true
-  roles:
-    - ROLENAME
+  vars:
+    users:
+      - { username: dblencowe, sudo: true, github_username: 'dblencowe' }
+  tasks:
+    - include: tasks/main.yml
