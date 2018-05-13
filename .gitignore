@@ -4,3 +4,4 @@
 *.pyc
 roles/*.*
 *tests/
+*.retry
