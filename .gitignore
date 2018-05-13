@@ -1,0 +1,6 @@
+.vagrant
+*~
+*.box
+*.pyc
+roles/*.*
+*tests/

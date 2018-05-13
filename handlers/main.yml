@@ -1,0 +1,6 @@
+---
+
+- name: restart ROLENAME
+  service:
+    name: "{{ ROLENAME_service }}"
+    state: restarted
